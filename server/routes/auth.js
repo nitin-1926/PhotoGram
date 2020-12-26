@@ -45,6 +45,41 @@ router.post('/signup', (req, res) => {
                 console.log(err);
             })
     }
-})
+});
+
+router.post('/signin', (req, res) => {
+    const { emailId, password } = req.body;
+    if (!emailId || !password) {
+        return res.status(422).json({
+            message: 'Sign in error',
+            error: 'Incomplete Fields. Please add email and password'
+        });
+    } else {
+        User.findOne({ emailId: emailId }).then(user => {
+            if (user) {
+                bcrypt.compare(password, user.password).then(isCorrectPassword => {
+                    if (isCorrectPassword) {
+                        return res.json({
+                            message: 'Sign in success',
+                            user
+                        });
+                    } else {
+                        return res.status(422).json({
+                            message: 'Sign in failed',
+                            error: 'Incorrect Password'
+                        });
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+            } else {
+                return res.status(422).json({
+                    message: 'Sign in Failed',
+                    error: 'User does not exists. Please signup first'
+                });
+            }
+        })
+    }
+});
 
 module.exports = router;
