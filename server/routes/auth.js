@@ -2,12 +2,9 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const bcrypt = require('bcryptjs');
 
-router.get('/', (req, res) => {
-    res.send('Hello');
-});
-
-router.post('/api/signup', (req, res) => {
+router.post('/signup', (req, res) => {
     const { name, emailId, password } = req.body;
     if (!name || !emailId || !password) {
         return res.status(422).json({
@@ -23,21 +20,25 @@ router.post('/api/signup', (req, res) => {
                         error: 'User already exists'
                     });
                 } else {
-                    const user = new User({
-                        name,
-                        emailId,
-                        password
-                    });
-                    user.save()
-                        .then(user => {
-                            if (user) {
-                                return res.json({
-                                    message: 'SignUp Successful',
-                                });
-                            }
-                        }).catch(err => {
-                            console.log(err);
+                    bcrypt.hash(password, 12).then(hashedPassword => {
+                        const user = new User({
+                            name,
+                            emailId,
+                            password: hashedPassword
                         });
+                        user.save()
+                            .then(user => {
+                                if (user) {
+                                    return res.json({
+                                        message: 'SignUp Successful',
+                                    });
+                                }
+                            }).catch(err => {
+                                console.log(err);
+                            });
+                    }).catch(err => {
+                        console.log(err);
+                    })
                 }
             })
             .catch(err => {
