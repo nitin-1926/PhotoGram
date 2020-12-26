@@ -5,6 +5,8 @@ const PORT = 5000;
 const { MONGO_URI } = require('./keys');
 
 require('./models/user');
+
+app.use(require('./routes/auth'));
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -21,15 +23,6 @@ mongoose.connection.on('error', err => {
 //     console.log('Home');
 //     res.send('Hello World');
 // });
-
-app.get('/', (req, res) => {
-    console.log('Home');
-    res.send('Hello World');
-});
-app.get('/about', (req, res) => {
-    console.log('About');
-    res.send('About Page');
-});
 
 app.listen(PORT, () => {
     console.log('Server is running on PORT: ', PORT);
