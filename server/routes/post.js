@@ -24,4 +24,15 @@ router.post('/createPost',requireLogin, (req, res) => {
     })
 });
 
+router.get('/allPosts', requireLogin, (req, res) => {
+    Post.find()
+        .populate('postedBy', '_id name emailId')
+        .then(posts => {
+            res.json({ posts });
+        })
+        .catch(err => {
+        console.log(err);
+        })
+});
+
 module.exports = router;
