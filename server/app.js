@@ -8,8 +8,6 @@ const { MONGO_URI } = require('./keys');
 require('./models/user');
 require('./models/post');
 
-app.use(require('./routes/auth'));
-// app.use(require('./routes/post'));
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -20,6 +18,9 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', err => {
     console.log('Error Connecting to MongoDB', err);
 });
+
+app.use(require('./routes/auth'));
+app.use(require('./routes/post'));
 // If MiddleWare written here then it's executed before each route. If you want it for specific routes then remove it and add middleware to those routes only.
 // app.use(customMiddleware);
 // app.get('/', customMiddleware, (req, res) => {
