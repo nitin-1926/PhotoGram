@@ -24,7 +24,7 @@ router.post('/createPost',requireLogin, (req, res) => {
     })
 });
 
-router.get('/allPosts', requireLogin, (req, res) => {
+router.get('/allPosts', (req, res) => {
     Post.find()
         .populate('postedBy', '_id name emailId')
         .then(posts => {
@@ -34,5 +34,14 @@ router.get('/allPosts', requireLogin, (req, res) => {
         console.log(err);
         })
 });
+
+router.get('/myPosts', requireLogin, (req, res) => {
+    Post.find({ postedBy: req.user._id })
+        .populate('postedBy', '_id name emailId')
+        .then(posts => {
+            res.json({ posts });
+        })
+        .catch(err => console.log(err));
+})
 
 module.exports = router;
