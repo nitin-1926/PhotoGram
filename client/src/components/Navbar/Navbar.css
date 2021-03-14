@@ -1,0 +1,17 @@
+.header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: antiquewhite !important;
+}
+
+.headerLogo {
+    cursor: pointer;
+}
+
+.headerButton {
+    margin: 10px;
+}
