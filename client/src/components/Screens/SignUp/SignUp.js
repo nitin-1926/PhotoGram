@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import Cards from '../Cards/Cards';
+import './SignUp.css';
 
 const SignUp = () => {
     return (
-        <div>
-            <h1>SignUp</h1>
+        <div className='cardContainer'>
+            <Cards isSignUp={true} />
         </div>
     )
 }
