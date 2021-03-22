@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
+
+.detailsCard {
+    text-align: center;
+    width: 40%;
+}
+
+.input {
+    margin-top: 6%;
+}
+
+.actionButton {
+    margin-top: 6%;
+}
