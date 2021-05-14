@@ -1,11 +1,14 @@
 import React from 'react';
+import PostCard from '../PostCard/PostCard';
+import './Home.css';
 
 const Home = () => {
     return (
-        <div>
-            <h1>Home</h1>
+        <div className='mainHomeDiv'>
+            <PostCard />
         </div>
-    )
-}
+        
+    );
+};
 
-export default Home
+export default Home;
