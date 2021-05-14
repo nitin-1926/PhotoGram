@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Avatar } from 'antd';
+import { HeartFilled, WechatFilled } from '@ant-design/icons';
 import './PostCard.css';
 
 const { Meta } = Card;
@@ -21,7 +22,11 @@ const PostCard = props => {
                 <img alt='post' className='postImage' src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png' />
             </div>
             <div className='cardActionsDiv'>
-                Comments section
+                <div className='cardActionsIconsDiv'>
+                    <HeartFilled />
+                    <WechatFilled />
+                </div>
+                <div>gupta7nitin</div>
             </div>
         </Card>
     );
