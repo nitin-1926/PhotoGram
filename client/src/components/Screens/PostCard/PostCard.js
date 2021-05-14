@@ -16,7 +16,7 @@ const PostCard = props => {
             className='mainCard'
             bodyStyle={{padding: '24px 0px'}}
         >
-            <Meta className='cardHeader' avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />} title='Europe Street beat' />
+            <Meta className='cardHeader' avatar={<Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />} title='Europe Street beat' />
             <div className='postImageDiv'>
                 <img alt='post' className='postImage' src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png' />
             </div>
