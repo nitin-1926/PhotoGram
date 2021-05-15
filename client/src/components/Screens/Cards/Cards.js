@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Card, Input, Button } from 'antd';
-import { UserOutlined, PhoneOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, PhoneOutlined, LockOutlined, SmileOutlined, KeyOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import './Cards.css';
 
@@ -32,7 +32,7 @@ const Cards = props => {
                 onChange={e => setName(e.target.value)}
                 size='large'
                 className='input'
-                prefix={<UserOutlined />}
+                prefix={<SmileOutlined />}
             />}
             {props.isSignUp && <Input
                 placeholder='Enter Phone Number'
@@ -56,7 +56,7 @@ const Cards = props => {
                 onChange={e => setConfirmPassword(e.target.value)}
                 size='large'
                 className='input'
-                prefix={<LockOutlined />}
+                prefix={<KeyOutlined />}
             />}
             <div className='buttonDiv'>
                 <Button
