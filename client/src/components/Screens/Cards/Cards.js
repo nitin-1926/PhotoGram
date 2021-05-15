@@ -9,7 +9,12 @@ const Cards = props => {
     const [isLoading, setIsLoading] = useState(false);
 
     return (
-        <Card title='PhotoGram' hoverable className='detailsCard' headStyle={{ fontSize: '35px', fontFamily: 'Grand Hotel, cursive' }}>
+        <Card
+            title='PhotoGram'
+            hoverable
+            className='detailsCard'
+            headStyle={{ fontSize: '35px', fontFamily: 'Grand Hotel, cursive' }}
+        >
             <Input size='large' placeholder='Enter Email' prefix={<UserOutlined />} />
             {props.isSignUp && <Input size='large' placeholder='Enter Name' className='input' prefix={<UserOutlined />} />}
             {props.isSignUp && <Input size='large' placeholder='Enter Phone Number' className='input' prefix={<PhoneOutlined />} />}
