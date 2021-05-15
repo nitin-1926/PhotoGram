@@ -12,8 +12,8 @@ const requireLogin = require('../middlewares/requireLogin');
 // });
 
 router.post('/signup', (req, res) => {
-    const { name, emailId, password } = req.body;
-    if (!name || !emailId || !password) {
+    const { name, emailId, password, phoneNumber } = req.body;
+    if (!name || !emailId || !password || !phoneNumber) {
         return res.status(422).json({
             message: 'SignUp Failed',
             error: 'Please add all the fields'
@@ -31,13 +31,14 @@ router.post('/signup', (req, res) => {
                         const user = new User({
                             name,
                             emailId,
-                            password: hashedPassword
+                            password: hashedPassword,
+                            phoneNumber
                         });
                         user.save()
                             .then(user => {
                                 if (user) {
                                     return res.json({
-                                        message: 'SignUp Successful',
+                                        message: 'successful',
                                     });
                                 }
                             }).catch(err => {
