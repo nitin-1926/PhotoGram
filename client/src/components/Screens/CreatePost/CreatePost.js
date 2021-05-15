@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Card, Input, Button, Upload } from 'antd';
+import { PlusCircleOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
 import './CreatePost.css';
 
@@ -29,6 +30,13 @@ const CreatePost = props => {
         imgWindow.document.write(image.outerHTML);
     };
 
+    const uploadButton = (
+        <div>
+            <PlusCircleOutlined style={{fontSize: '18px'}} />
+            <div style={{ marginTop: 8 }}>Upload Image</div>
+        </div>
+    );
+
     return (
         <div className='cardContainer'>
             <Card
@@ -44,12 +52,12 @@ const CreatePost = props => {
                         onChange={onChange}
                         onPreview={onPreview}
                     >
-                        {fileList.length < 1 && '+ Upload Image'}
+                        {fileList.length < 1 && uploadButton}
                     </Upload>
                 </ImgCrop>
-                <TextArea rows={3} placeholder='Enter Caption'/>
+                <TextArea rows={2} placeholder='Enter Caption' style={{marginTop: '4%'}} />
                 <div className='buttonDiv'>
-                    <Button type='primary' size='large' className='addPostButton' onClick={() => {}}>Add Post</Button>
+                    <Button shape='round' type='primary' size='large' className='addPostButton' onClick={() => {}} icon={<AppstoreAddOutlined />}>Add Post</Button>
                 </div>
             </Card>
         </div>

@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Button, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import { LoginOutlined, PlusSquareOutlined, UserOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import logoPng from '../../assets/images/logo.png';
 import './Navbar.css';
 
-const { SubMenu } = Menu;
 const { Header } = Layout;
 
 const Navbar = props => {
 
+    const [currentKey, setCurrentKey] = useState('');
+
+    const handleClick = e => {
+        setCurrentKey(e.key);
+    };
+
     return (
         <Header className='header'>
                 <Link to='/'>
-                    <div className='headerLogo' onClick={() => { console.log('Logo Clicked'); }}>
+                <div className='headerLogo' onClick={() => {
+                    setCurrentKey('');
+                }}>
                         <img src={logoPng} alt={'PhotoGram'} className='logo'/>
                     </div>
                 </Link>
-                <Menu mode='horizontal' defaultSelectedKeys={['2']}>
+                <Menu mode='horizontal' onClick={handleClick} selectedKeys={[currentKey]}>
                     <Menu.Item className='navbarMenuItem' key='login' icon={<LoginOutlined className='navbarMenuIcon'/>}>
                         <Link to='/login'>Login</Link>
                     </Menu.Item>
