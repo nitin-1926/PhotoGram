@@ -11,7 +11,6 @@ const Cards = props => {
     const [password, setPassword] = useState(null);
     const [confirmPassword, setConfirmPassword] = useState(null);
     const [phoneNumber, setPhoneNumber] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
 
     return (
         <Card
@@ -64,6 +63,7 @@ const Cards = props => {
                     type='primary'
                     size='large'
                     className='actionButton'
+                    loading={props.isLoading || false}
                     onClick={() => props.handleSubmitButtonClick(emailId, password, name, phoneNumber)}
                 >
                     {props.isSignUp ? 'Sign Up' : 'Login'}
