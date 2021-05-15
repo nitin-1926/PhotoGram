@@ -18,16 +18,16 @@ const Navbar = props => {
                     </div>
                 </Link>
                 <Menu mode='horizontal' defaultSelectedKeys={['2']}>
-                    <Menu.Item key='login' icon={<LoginOutlined />}>
+                    <Menu.Item className='navbarMenuItem' key='login' icon={<LoginOutlined className='navbarMenuIcon'/>}>
                         <Link to='/login'>Login</Link>
                     </Menu.Item>
-                    <Menu.Item key='signUp' icon={<PlusSquareOutlined />}>
+                    <Menu.Item className='navbarMenuItem' key='signUp' icon={<PlusSquareOutlined className='navbarMenuIcon'/>}>
                         <Link to='/signup'>Sign Up</Link>
                     </Menu.Item>
-                    <Menu.Item key='profile' icon={<UserOutlined />}>
+                    <Menu.Item className='navbarMenuItem' key='profile' icon={<UserOutlined className='navbarMenuIcon'/>}>
                         <Link to='/profile'>Profile</Link>
                     </Menu.Item>
-                    <Menu.Item key='createPost' icon={<AppstoreAddOutlined />}>
+                    <Menu.Item className='navbarMenuItem' key='createPost' icon={<AppstoreAddOutlined className='navbarMenuIcon'/>}>
                         <Link to='/createPost'>Create Post</Link>
                     </Menu.Item>
                 </Menu>
