@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Avatar } from 'antd';
-import { HeartFilled, WechatFilled } from '@ant-design/icons';
+import { Card, Avatar, Input  } from 'antd';
+import { HeartFilled, SmileOutlined } from '@ant-design/icons';
 import './PostCard.css';
 
 const { Meta } = Card;
@@ -15,19 +15,22 @@ const PostCard = props => {
         <Card
             hoverable
             className='mainCard'
-            bodyStyle={{padding: '24px 0px'}}
+            bodyStyle={{padding: '12px 0px'}}
         >
             <Meta className='cardHeader' avatar={<Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />} title='Europe Street beat' />
             <div className='postImageDiv'>
-                <img alt='post' className='postImage' src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png' />
+                <img alt='post' className='postImage' src='https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png' />
             </div>
             <div className='cardActionsDiv'>
                 <div className='cardActionsIconsDiv'>
-                    <HeartFilled />
-                    <WechatFilled />
+                    <HeartFilled className='cardActionsIcon'/>
                 </div>
-                <div>gupta7nitin</div>
+                <div className='cardActionsCaptionDiv'>
+                    <span className='cardActionsUsername'>gupta7nitin</span>
+                    <span className='cardActionsCaption'>Here goes caption of the photo</span>
+                </div>
             </div>
+            <div className='cardActionsInput'><Input size='large' placeholder='Add a comment' prefix={<SmileOutlined />} /></div>
         </Card>
     );
 };

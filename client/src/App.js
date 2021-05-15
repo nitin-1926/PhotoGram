@@ -20,21 +20,21 @@ const App = () => {
           <Navbar />
           <Content className='content'>
 
-            <Route exact path='/'>
-              <Home />
-            </Route>
+          <Route exact path='/'>
+            <Home />
+          </Route>
 
-            <Route path='/login'>
-              <Login />
-            </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
 
-            <Route path='/signup'>
-              <SignUp />
-            </Route>
+          <Route path='/signup'>
+            <SignUp />
+          </Route>
 
-            <Route path='/profile'>
-              <Profile />
-            </Route>
+          <Route path='/profile'>
+            <Profile />
+          </Route>
 
           </Content>
 

@@ -1,8 +1,9 @@
 .body {
     height: 100vh;
+    overflow: auto;
 }
 
 .content {
-    padding: 0 50px;
-    margin-top: 64;
+    padding: 30px 150px;
+    overflow: auto;
 }

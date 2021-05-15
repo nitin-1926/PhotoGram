@@ -4,6 +4,9 @@
     flex-direction: row;
     justify-content: space-between;
     background-color: antiquewhite !important;
+    height: 65px !important;
+    line-height: 65px !important;
+    padding: 0px 150px !important;
 }
 
 .headerLogo {
