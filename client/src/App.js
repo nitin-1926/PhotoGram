@@ -36,6 +36,10 @@ const App = () => {
             <Profile />
           </Route>
 
+          <Route path='/createPost'>
+            <Home />
+          </Route>
+            
           </Content>
 
         </Layout>

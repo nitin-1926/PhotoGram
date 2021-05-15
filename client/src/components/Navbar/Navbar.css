@@ -4,11 +4,16 @@
     flex-direction: row;
     justify-content: space-between;
     /* background-color: antiquewhite !important; */
-    height: 65px !important;
-    line-height: 65px !important;
+    height: 55px !important;
+    line-height: 55px !important;
     padding: 0px 150px !important;
 }
 
 .headerLogo {
     cursor: pointer;
+    height: 100%;
+}
+
+.logo {
+    height: inherit;
 }

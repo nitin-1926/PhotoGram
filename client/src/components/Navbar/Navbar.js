@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Button, Menu } from 'antd';
-import { LoginOutlined, PlusSquareOutlined, UserOutlined } from '@ant-design/icons';
+import { LoginOutlined, PlusSquareOutlined, UserOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import logoPng from '../../assets/images/logo.png';
 import './Navbar.css';
@@ -13,8 +13,8 @@ const Navbar = props => {
     return (
         <Header className='header'>
                 <Link to='/'>
-                    <div className='logo headerLogo' onClick={() => { console.log('Logo Clicked'); }}>
-                        <img src={logoPng} alt={'PhotoGram'} height={65} width={180}/>
+                    <div className='headerLogo' onClick={() => { console.log('Logo Clicked'); }}>
+                        <img src={logoPng} alt={'PhotoGram'} className='logo'/>
                     </div>
                 </Link>
                 <Menu mode='horizontal' defaultSelectedKeys={['2']}>
@@ -27,9 +27,9 @@ const Navbar = props => {
                     <Menu.Item key='profile' icon={<UserOutlined />}>
                         <Link to='/profile'>Profile</Link>
                     </Menu.Item>
-                    {/* <Menu.Item key='signUp' icon={<PlusSquareOutlined />}>
-                        <Link to='/signup'>Profile</Link>
-                    </Menu.Item> */}
+                    <Menu.Item key='createPost' icon={<AppstoreAddOutlined />}>
+                        <Link to='/createPost'>Create Post</Link>
+                    </Menu.Item>
                 </Menu>
         </Header>
     );
