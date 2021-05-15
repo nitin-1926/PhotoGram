@@ -46,3 +46,20 @@
 .cardActionsCaption {
     margin-left: 3%;
 }
+
+.cardActionsInput {
+    margin-top: 3%;
+}
+
+.cardActionsCommentInput {
+    border-top: 1px solid #d9d9d9 !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+    border-bottom: 0px !important;
+    box-shadow: none !important;
+}
+
+.cardActionsCommentInput:focus {
+    /* box-shadow: 0 0 0 2px rgb(24 144 255 / 20%); */
+    box-shadow: none !important;
+}

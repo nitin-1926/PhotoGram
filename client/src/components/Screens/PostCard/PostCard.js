@@ -15,11 +15,11 @@ const PostCard = props => {
         <Card
             hoverable
             className='mainCard'
-            bodyStyle={{padding: '12px 0px'}}
+            bodyStyle={{padding: '12px 0px 0px'}}
         >
-            <Meta className='cardHeader' avatar={<Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />} title='Europe Street beat' />
+            <Meta className='cardHeader' avatar={<Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />} title='gupta7nitin' />
             <div className='postImageDiv'>
-                <img alt='post' className='postImage' src='https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png' />
+                <img alt='post' className='postImage' src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png' />
             </div>
             <div className='cardActionsDiv'>
                 <div className='cardActionsIconsDiv'>
@@ -30,7 +30,7 @@ const PostCard = props => {
                     <span className='cardActionsCaption'>Here goes caption of the photo</span>
                 </div>
             </div>
-            <div className='cardActionsInput'><Input size='large' placeholder='Add a comment' prefix={<SmileOutlined />} /></div>
+            <div className='cardActionsInput'><Input className='cardActionsCommentInput' size='large' placeholder='Add a comment' prefix={<SmileOutlined />} /></div>
         </Card>
     );
 };
