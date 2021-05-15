@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import Cards from '../Cards/Cards';
 import { addNotification } from '../../../common/commonFunctions';
+import { useHistory } from 'react-router-dom';
 import './SignUp.css';
 
 const SignUp = () => {
 
     const [isLoading, setIsLoading] = useState(false);
+    const history = useHistory();
 
     const signUpUser = (emailId, password, name, phoneNumber) => {
         setIsLoading(true);
@@ -25,6 +27,7 @@ const SignUp = () => {
             console.log(data);
             if (data.message === 'successful') {
                 addNotification('signUpSuccess', 'Sign Up Successful', 'Your account has been created successfully. Hope to enjoy using our platform', 'success');
+                history.push('/login');
             } else {
                 addNotification('signUpFailed', data.message, data.error, 'error');
             }
