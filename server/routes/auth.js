@@ -71,7 +71,7 @@ router.post('/signin', (req, res) => {
                             _id: user._id
                         }, JWT_SECRET);
                         return res.json({
-                            message: 'Sign in success',
+                            message: 'successful',
                             user,
                             token
                         });
