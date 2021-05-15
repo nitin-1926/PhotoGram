@@ -5,6 +5,7 @@ import Home from './components/Screens/Home/Home';
 import Login from './components/Screens/Login/Login';
 import SignUp from './components/Screens/SignUp/SignUp';
 import Profile from './components/Screens/Profile/Profile';
+import CreatePost from './components/Screens/CreatePost/CreatePost';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import 'antd/dist/antd.css';
@@ -37,7 +38,7 @@ const App = () => {
           </Route>
 
           <Route path='/createPost'>
-            <Home />
+            <CreatePost />
           </Route>
             
           </Content>
