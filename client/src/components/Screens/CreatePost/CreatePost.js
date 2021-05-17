@@ -2,16 +2,43 @@ import React, {useState, useEffect} from 'react';
 import { Card, Input, Button, Upload } from 'antd';
 import { PlusCircleOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
+import { addNotification } from '../../../common/commonFunctions';
+import { useHistory } from 'react-router-dom';
 import './CreatePost.css';
 
 const { TextArea } = Input;
 
 const CreatePost = props => {
 
+    const history = useHistory();
+
     const [fileList, setFileList] = useState([]);
     const [caption, setCaption] = useState(null);
     const [image, setImage] = useState(null);
-    const [imageUrl, setImageUrl] = useState(null);
+
+    const addPost = imageUrl => {
+        fetch('/createPost', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                caption,
+                imageUrl
+            })
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+                // if (data.message === 'successful') {
+                //     addNotification('loginSuccess', 'Login Successful', 'You are now logged in successfully. Hope to enjoy using our platform to the fullest', 'success');
+                //     history.push('/');
+                // } else {
+                //     addNotification('loginFailed', data.message, data.error, 'error');
+                // }
+                // setIsLoading(false);
+            })
+            .catch(err => console.log(err));
+    };
 
     const handleAddPost = () => {
         console.log('Inside add post');
@@ -26,6 +53,7 @@ const CreatePost = props => {
         }).then(res => res.json())
             .then(data => {
                 console.log('data: ', data);
+                addPost(data.secure_url);
             })
             .catch(err => console.log(err));
     };

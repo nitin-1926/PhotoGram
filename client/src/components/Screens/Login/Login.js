@@ -11,7 +11,6 @@ const Login = () => {
 
     const signInUser = (emailId, password) => {
         setIsLoading(true);
-        console.log(emailId, password);
         fetch('/signin', {
             method: 'POST',
             headers: {
