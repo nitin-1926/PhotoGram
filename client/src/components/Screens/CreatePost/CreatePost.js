@@ -9,26 +9,41 @@ const { TextArea } = Input;
 const CreatePost = props => {
 
     const [fileList, setFileList] = useState([]);
-    
-    const onChange = ({ fileList: newFileList }) => {
-        console.log('New file list: ', newFileList);
-        setFileList(newFileList);
+    const [caption, setCaption] = useState(null);
+    const [image, setImage] = useState(null);
+    const [imageUrl, setImageUrl] = useState(null);
+
+    const handleAddPost = () => {
+        console.log('Inside add post');
+        const data = new FormData();
+        data.append('file', image);
+        data.append('upload_preset', 'photogram');
+        data.append('cloud_name', 'nitin-1926');
+
+        fetch('https://api.cloudinary.com/v1_1/nitin-1926/image/upload', {
+            method: 'POST',
+            body: data
+        }).then(res => res.json())
+            .then(data => {
+                console.log('data: ', data);
+            })
+            .catch(err => console.log(err));
     };
     
-    const onPreview = async file => {
-        let src = file.url;
-        if (!src) {
-            src = await new Promise(resolve => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file.originFileObj);
-                reader.onload = () => resolve(reader.result);
-            });
-        }
-        const image = new Image();
-        image.src = src;
-        const imgWindow = window.open(src);
-        imgWindow.document.write(image.outerHTML);
-    };
+    // const onPreview = async file => {
+    //     let src = file.url;
+    //     if (!src) {
+    //         src = await new Promise(resolve => {
+    //             const reader = new FileReader();
+    //             reader.readAsDataURL(file.originFileObj);
+    //             reader.onload = () => resolve(reader.result);
+    //         });
+    //     }
+    //     const image = new Image();
+    //     image.src = src;
+    //     const imgWindow = window.open(src);
+    //     imgWindow.document.write(image.outerHTML);
+    // };
 
     const uploadButton = (
         <div>
@@ -45,19 +60,21 @@ const CreatePost = props => {
             >
                 <ImgCrop rotate>
                     <Upload
-                        // action={file => console.log('File: ', file)}
-                        action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
+                        action={file => {
+                            setImage(file);
+                            setFileList([file]);
+                        }}
                         listType='picture-card'
                         fileList={fileList}
-                        onChange={onChange}
-                        onPreview={onPreview}
+                        // onPreview={onPreview}
+                        onRemove={() => setFileList([])}
                     >
                         {fileList.length < 1 && uploadButton}
                     </Upload>
                 </ImgCrop>
-                <TextArea rows={2} placeholder='Enter Caption' style={{marginTop: '4%'}} />
+                <TextArea value={caption} rows={2} placeholder='Enter Caption' style={{ marginTop: '4%' }} onChange={e => setCaption(e.target.value)}/>
                 <div className='buttonDiv'>
-                    <Button shape='round' type='primary' size='large' className='addPostButton' onClick={() => {}} icon={<AppstoreAddOutlined />}>Add Post</Button>
+                    <Button shape='round' type='primary' size='large' className='addPostButton' onClick={handleAddPost} icon={<AppstoreAddOutlined />}>Add Post</Button>
                 </div>
             </Card>
         </div>
