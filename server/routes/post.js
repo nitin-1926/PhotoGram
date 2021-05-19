@@ -14,13 +14,14 @@ router.post('/createPost',requireLogin, (req, res) => {
     req.user.__v = undefined;
     const post = new Post({
         caption,
-        imageUrl,
+        photoUrl: imageUrl,
         postedBy: req.user
     });
     post.save().then(response => {
-        res.json({ post: response });
+        res.json({ message: 'successful', post: response });
     }).catch(err => {
         console.log(err);
+        res.json({ message: err });
     })
 });
 

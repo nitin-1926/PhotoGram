@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Card, Input, Button, Upload } from 'antd';
 import { PlusCircleOutlined, AppstoreAddOutlined } from '@ant-design/icons';
-import ImgCrop from 'antd-img-crop';
 import { addNotification } from '../../../common/commonFunctions';
 import { useHistory } from 'react-router-dom';
 import './CreatePost.css';
@@ -15,12 +14,14 @@ const CreatePost = props => {
     const [fileList, setFileList] = useState([]);
     const [caption, setCaption] = useState(null);
     const [image, setImage] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const addPost = imageUrl => {
         fetch('/createPost', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
             },
             body: JSON.stringify({
                 caption,
@@ -29,33 +30,38 @@ const CreatePost = props => {
         }).then(res => res.json())
             .then(data => {
                 console.log(data);
-                // if (data.message === 'successful') {
-                //     addNotification('loginSuccess', 'Login Successful', 'You are now logged in successfully. Hope to enjoy using our platform to the fullest', 'success');
-                //     history.push('/');
-                // } else {
-                //     addNotification('loginFailed', data.message, data.error, 'error');
-                // }
-                // setIsLoading(false);
+                if (data.message === 'successful') {
+                    addNotification('postAdded', 'Post added successfully', 'Your post is added successfully. Hope you get maximum likes and comment on it ;)', 'success');
+                    history.push('/');
+                } else {
+                    addNotification('postAddedFailed', 'Cannot add post', data.error, 'error');
+                }
+                setIsLoading(false);
             })
             .catch(err => console.log(err));
     };
 
     const handleAddPost = () => {
-        console.log('Inside add post');
+        setIsLoading(true);
         const data = new FormData();
         data.append('file', image);
         data.append('upload_preset', 'photogram');
         data.append('cloud_name', 'nitin-1926');
 
-        fetch('https://api.cloudinary.com/v1_1/nitin-1926/image/upload', {
-            method: 'POST',
-            body: data
-        }).then(res => res.json())
-            .then(data => {
-                console.log('data: ', data);
-                addPost(data.secure_url);
-            })
-            .catch(err => console.log(err));
+        if (caption) {
+            fetch('https://api.cloudinary.com/v1_1/nitin-1926/image/upload', {
+                method: 'POST',
+                body: data
+            }).then(res => res.json())
+                .then(data => {
+                    console.log('data: ', data);
+                    addPost(data.secure_url);
+                })
+                .catch(err => console.log(err));
+        } else {
+            addNotification('createPostFailed', 'Cannot create post', 'Please enter all the fields to continue', 'error');
+        }
+
     };
     
     // const onPreview = async file => {
@@ -86,23 +92,21 @@ const CreatePost = props => {
                 hoverable
                 className='createPost'
             >
-                <ImgCrop rotate>
-                    <Upload
-                        action={file => {
-                            setImage(file);
-                            setFileList([file]);
-                        }}
-                        listType='picture-card'
-                        fileList={fileList}
-                        // onPreview={onPreview}
-                        onRemove={() => setFileList([])}
-                    >
-                        {fileList.length < 1 && uploadButton}
-                    </Upload>
-                </ImgCrop>
+                <Upload
+                    action={file => {
+                        setImage(file);
+                        setFileList([file]);
+                    }}
+                    listType='picture-card'
+                    fileList={fileList}
+                    // onPreview={onPreview}
+                    onRemove={() => setFileList([])}
+                >
+                    {fileList.length < 1 && uploadButton}
+                </Upload>
                 <TextArea value={caption} rows={2} placeholder='Enter Caption' style={{ marginTop: '4%' }} onChange={e => setCaption(e.target.value)}/>
                 <div className='buttonDiv'>
-                    <Button shape='round' type='primary' size='large' className='addPostButton' onClick={handleAddPost} icon={<AppstoreAddOutlined />}>Add Post</Button>
+                    <Button loading={isLoading} shape='round' type='primary' size='large' className='addPostButton' onClick={handleAddPost} icon={<AppstoreAddOutlined />}>Add Post</Button>
                 </div>
             </Card>
         </div>

@@ -5,17 +5,17 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    timeStamp: {
-        type: Date,
-        default: new Date()
-    },
-    photo: {
+    photoUrl: {
         type: String,
         required: true
     },
     postedBy: {
         type: ObjectId,
         ref: 'User'
+    },
+    timeStamp: {
+        type: Date,
+        default: new Date()
     }
 });
 mongoose.model('Post', postSchema);
