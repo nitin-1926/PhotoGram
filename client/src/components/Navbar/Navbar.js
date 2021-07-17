@@ -14,28 +14,28 @@ const navbarLinks = [
         route: '/login',
         icon: <LoginOutlined className='navbarMenuIcon'/>,
         key: 'login',
-        isVisibleOnLogin: false
+        isVisibleAfterLogin: false
     },
     {
         label: 'Sign up',
         route: '/signup',
         icon: <PlusSquareOutlined className='navbarMenuIcon'/>,
         key: 'signup',
-        isVisibleOnLogin: false
+        isVisibleAfterLogin: false
     },
     {
         label: 'Profile',
         route: '/profile',
         icon: <UserOutlined className='navbarMenuIcon'/>,
         key: 'profile',
-        isVisibleOnLogin: true
+        isVisibleAfterLogin: true
     },
     {
         label: 'Create post',
         route: '/createPost',
         icon: <AppstoreAddOutlined className='navbarMenuIcon'/>,
         key: 'createPost',
-        isVisibleOnLogin: true
+        isVisibleAfterLogin: true
     },
 ];
 
@@ -48,24 +48,26 @@ const Navbar = props => {
         setCurrentKey(e.key);
     };
 
+    const linksToDisplay = state ? navbarLinks.filter(linkData => linkData.isVisibleAfterLogin) : navbarLinks.filter(linkData => !linkData.isVisibleAfterLogin);
+
     return (
         <Header className='header'>
-                <Link to='/'>
+            <Link to={state ? '/' : '/login'}>
                 <div className='headerLogo' onClick={() => {
                     setCurrentKey('');
                 }}>
-                        <img src={logoPng} alt={'PhotoGram'} className='logo'/>
-                    </div>
-                </Link>
-                <Menu mode='horizontal' onClick={handleClick} selectedKeys={[currentKey]}>
-                    {navbarLinks.map(linkData => {
-                        return (
-                            <Menu.Item className='navbarMenuItem' key={linkData.key} icon={linkData.icon}>
-                                <Link to={linkData.route}>{ linkData.label }</Link>
-                            </Menu.Item>
-                        );
-                    })}
-                </Menu>
+                    <img src={logoPng} alt={'PhotoGram'} className='logo'/>
+                </div>
+            </Link>
+            <Menu mode='horizontal' onClick={handleClick} selectedKeys={[currentKey]}>
+                {linksToDisplay.map(linkData => {
+                    return (
+                        <Menu.Item className='navbarMenuItem' key={linkData.key} icon={linkData.icon}>
+                            <Link to={linkData.route}>{ linkData.label }</Link>
+                        </Menu.Item>
+                    );
+                })}
+            </Menu>
         </Header>
     );
 }
