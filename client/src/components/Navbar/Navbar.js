@@ -1,7 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Layout, Menu } from 'antd';
-import { LoginOutlined, PlusSquareOutlined, UserOutlined, AppstoreAddOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import {
+    LoginOutlined,
+    PlusSquareOutlined,
+    UserOutlined,
+    AppstoreAddOutlined,
+    LogoutOutlined
+} from '@ant-design/icons';
+import { Link, useHistory } from 'react-router-dom';
 import logoPng from '../../assets/images/logo.png';
 import { UserContext } from '../../App';
 import './Navbar.css';
@@ -12,40 +18,52 @@ const navbarLinks = [
     {
         label: 'Login',
         route: '/login',
-        icon: <LoginOutlined className='navbarMenuIcon'/>,
+        icon: <LoginOutlined />,
         key: 'login',
         isVisibleAfterLogin: false
     },
     {
         label: 'Sign up',
         route: '/signup',
-        icon: <PlusSquareOutlined className='navbarMenuIcon'/>,
+        icon: <PlusSquareOutlined />,
         key: 'signup',
         isVisibleAfterLogin: false
     },
     {
         label: 'Profile',
         route: '/profile',
-        icon: <UserOutlined className='navbarMenuIcon'/>,
+        icon: <UserOutlined />,
         key: 'profile',
         isVisibleAfterLogin: true
     },
     {
         label: 'Create post',
         route: '/createPost',
-        icon: <AppstoreAddOutlined className='navbarMenuIcon'/>,
+        icon: <AppstoreAddOutlined />,
         key: 'createPost',
         isVisibleAfterLogin: true
     },
+    {
+        label: 'Logout',
+        route: '/login',
+        icon: <LogoutOutlined />,
+        key: 'logout',
+        isVisibleAfterLogin: true
+    }
 ];
 
-const Navbar = props => {
+const Navbar = () => {
     const { state, dispatch } = useContext(UserContext);
-
+    const history = useHistory();
     const [currentKey, setCurrentKey] = useState('');
 
     const handleClick = e => {
-        setCurrentKey(e.key);
+        if (e.key === 'logout') {
+            localStorage.clear();
+            dispatch({ type: 'CLEAR' });
+        } else {
+            setCurrentKey(e.key);
+        }
     };
 
     const linksToDisplay = state ? navbarLinks.filter(linkData => linkData.isVisibleAfterLogin) : navbarLinks.filter(linkData => !linkData.isVisibleAfterLogin);
