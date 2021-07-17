@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useContext } from 'react';
 import Cards from '../Cards/Cards';
 import { addNotification } from '../../../common/commonFunctions';
 import { useHistory } from 'react-router-dom';
+import { UserContext } from '../../../App';
 import './Login.css';
 
 const Login = () => {
+    const { state, dispatch } = useContext(UserContext);
 
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
@@ -26,6 +28,7 @@ const Login = () => {
                 if (data.message === 'successful') {
                     localStorage.setItem('jwt', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
+                    dispatch({ type: 'USER', payload: data.user });
                     addNotification('loginSuccess', 'Login Successful', 'You are now logged in successfully. Hope to enjoy using our platform to the fullest', 'success');
                     history.push('/');
                 } else {
