@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PostCard from '../PostCard/PostCard';
+import { UserContext } from '../../../App';
 import './Profile.css';
 
 const Profile = () => {
 
     const [userPosts, setUserPosts] = useState([]);
-
+    const {state, dispatch} = useContext(UserContext);
     useEffect(() => {
         fetch('myPosts', {
             headers: {
@@ -31,7 +32,7 @@ const Profile = () => {
                     />
                 </div>
                 <div>
-                    <h1>Nitin Gupta</h1>
+                    <h1>{ state && state.name}</h1>
                     <div style={{display: 'flex', justifyContent: 'space-around', width: '108%'}}>
                         <h5>{userPosts ? userPosts.length : 'No available'} posts</h5>
                         <h5>77 followers</h5>
