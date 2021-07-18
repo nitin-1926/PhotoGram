@@ -27,6 +27,7 @@ const Home = () => {
                     photoUrl={postData.photoUrl}
                     userId={postData.postedBy.emailId}
                     caption={postData.caption}
+                    imageHeight={'280px'}
                 />
             })}
         </div>

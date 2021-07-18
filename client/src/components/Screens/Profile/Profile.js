@@ -23,7 +23,7 @@ const Profile = () => {
     // />
 
     return (
-        <div style={{maxWidth: '70%', margin: '0px auto'}}>
+        <div style={{maxWidth: '80%', margin: '0px auto'}}>
             <div style={{display: 'flex', justifyContent: 'space-around', margin: '18px 0px', borderBottom: '1px solid grey'}}>
                 <div>
                     <img style={{ width: '160px', height: '160px', borderRadius: '80px' }} alt='Profile Pic'
@@ -33,7 +33,7 @@ const Profile = () => {
                 <div>
                     <h1>Nitin Gupta</h1>
                     <div style={{display: 'flex', justifyContent: 'space-around', width: '108%'}}>
-                        <h5>77 posts</h5>
+                        <h5>{userPosts ? userPosts.length : 'No available'} posts</h5>
                         <h5>77 followers</h5>
                         <h5>77 following</h5>
                     </div>
@@ -48,6 +48,8 @@ const Profile = () => {
                         photoUrl={postData.photoUrl}
                         userId={postData.postedBy.emailId}
                         caption={postData.caption}
+                        imageHeight={'250px'}
+                        isProfilePage={true}
                     />
                 })}
             </div>

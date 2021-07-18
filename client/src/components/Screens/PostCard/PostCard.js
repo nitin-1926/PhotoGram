@@ -10,7 +10,9 @@ const PostCard = ({
     title,
     photoUrl,
     userId,
-    caption
+    caption,
+    imageHeight,
+    isProfilePage
 }) => {
 
     
@@ -22,11 +24,11 @@ const PostCard = ({
     return (
         <Card
             hoverable
-            className='mainCard'
+            className={`${isProfilePage ? 'profileCard' : 'mainCard'}`}
             bodyStyle={bodyStyle}
         >
             <Meta className='cardHeader' avatar={<Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />} title={title} />
-            <div className='postImageDiv'>
+            <div className='postImageDiv' style={{height: imageHeight}}>
                 <img alt='post' className='postImage' src={photoUrl} />
             </div>
             <div className='cardActionsDiv'>

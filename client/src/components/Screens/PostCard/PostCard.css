@@ -1,6 +1,11 @@
 .mainCard {
     width: 40%;
-    margin: 0px 0px 30px 0px !important
+    margin: 0px 0px 30px 0px !important;
+}
+
+.profileCard {
+    width: 31%;
+    margin: 0px 0px 30px 0px !important;
 }
 
 .cardHeader {
@@ -9,15 +14,17 @@
 
 .postImageDiv {
     margin: 3% 0;
-    /* max-height: 310px; */
-    height: auto;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .postImage {
     width: 100%;
     float: right;
-    height: auto;
+    height: 100%;
 }
 
 .cardActionsDiv {
@@ -34,9 +41,10 @@
 
 .cardActionsCaptionDiv {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    /* align-items: center; */
     justify-content: flex-start;
+    height: 60px
 }
 
 .cardActionsUsername {
