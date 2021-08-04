@@ -18,20 +18,17 @@ const Home = () => {
             });
     }, []);
 
+    const onPostDataChange = newPostsData => {
+        setPosts(newPostsData);
+    };
+
     return (
-        <div className='mainHomeDiv'>
-            {posts.length > 0 && posts.map((postData) => {
-                return <PostCard
-                    bodyStyle={{padding: '12px 0px 0px'}}
-                    title={postData.postedBy.name}
-                    photoUrl={postData.photoUrl}
-                    userId={postData.postedBy.emailId}
-                    caption={postData.caption}
-                    imageHeight={'280px'}
-                />
-            })}
-        </div>
-        
+        <PostCard
+            posts={posts}
+            bodyStyle={{padding: '12px 0px 0px'}}
+            imageHeight={'280px'}
+            onPostDataChange={onPostDataChange}
+        />
     );
 };
 
