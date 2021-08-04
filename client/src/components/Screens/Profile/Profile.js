@@ -19,10 +19,6 @@ const Profile = () => {
             });
     }, []);
 
-    // <img alt='Profile Pics' className='galleryPhotos'
-    //     src='https://images.unsplash.com/photo-1459356979461-dae1b8dcb702?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Ym95fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
-    // />
-
     return (
         <div style={{maxWidth: '80%', margin: '0px auto'}}>
             <div style={{display: 'flex', justifyContent: 'space-around', margin: '18px 0px', borderBottom: '1px solid grey'}}>
@@ -41,19 +37,12 @@ const Profile = () => {
                 </div>
             </div>
 
-            <div className='gallery'>
-                {userPosts && userPosts.length > 0 && userPosts.map(postData => {
-                    return <PostCard
-                        bodyStyle={{padding: '12px 0px 0px'}}
-                        title={postData.postedBy.name}
-                        photoUrl={postData.photoUrl}
-                        userId={postData.postedBy.emailId}
-                        caption={postData.caption}
-                        imageHeight={'250px'}
-                        isProfilePage={true}
-                    />
-                })}
-            </div>
+            <PostCard
+                posts={userPosts}
+                bodyStyle={{padding: '12px 0px 0px'}}
+                imageHeight={'250px'}
+                isProfilePage={true}
+            />
         </div>
     )
 }
