@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
     Card,
     Avatar,
@@ -22,12 +22,23 @@ const PostCard = ({
     onPostDataChange
 }) => {
 
+    const [comment, setComment] = useState(null);
     const { state, dispatch } = useContext(UserContext);
 
-    const updatePosts = newPostData => {
+    const updatePostsLikes = newPostData => {
         const updatedPosts = posts.map(postData => {
             if (postData._id === newPostData._id) {
                 postData.likedBy = newPostData.likedBy;
+            }
+            return postData;
+        });
+        onPostDataChange(updatedPosts);
+    };
+
+    const updatePostsComments = newPostData => {
+        const updatedPosts = posts.map(postData => {
+            if (postData._id === newPostData._id) {
+                postData.comments = newPostData.comments;
             }
             return postData;
         });
@@ -46,7 +57,7 @@ const PostCard = ({
             })
         }).then(res => res.json())
             .then(newPostData => {
-                updatePosts(newPostData);
+                updatePostsLikes(newPostData);
             });
     };
 
@@ -62,7 +73,24 @@ const PostCard = ({
             })
         }).then(res => res.json())
             .then(newPostData => {
-                updatePosts(newPostData);
+                updatePostsLikes(newPostData);
+            });
+    };
+
+    const addComment = id => {
+        fetch('addComment', {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            },
+            body: JSON.stringify({
+                postId: id,
+                commentText: comment
+            })
+        }).then(res => res.json())
+            .then(newPostData => {
+                updatePostsComments(newPostData);
             });
     };
     
@@ -97,7 +125,21 @@ const PostCard = ({
                     <span className='cardActionsCaption'>{postData.caption}</span>
                 </div>
             </div>
-            <div className='cardActionsInput'><Input className='cardActionsCommentInput' size='large' placeholder='Add a comment' prefix={<SmileOutlined />} /></div>
+            <div className='cardActionsInput'>
+                <Input
+                    value={comment}
+                    className='cardActionsCommentInput'
+                    size='large'
+                    placeholder='Add a comment'
+                    prefix={<SmileOutlined />}
+                    onChange={e => {
+                        e.preventDefault();
+                        const text = e.target.value;
+                        setComment(text);
+                    }}
+                    onPressEnter={() => addComment(postData._id)}
+                />
+            </div>
         </Card>
     })}
     </div>
