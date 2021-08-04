@@ -43,6 +43,29 @@ router.get('/myPosts', requireLogin, (req, res) => {
             res.json({ posts });
         })
         .catch(err => console.log(err));
-})
+});
+
+router.put('/likePost', requireLogin, (req, res) => {
+    Post.findByIdAndUpdate(req.body.postId, {
+        $push: { likedBy: req.user._id }
+    }, {
+        new: true
+    }).exec((err, result) => {
+        if (err) return res.status(422).json({ message: err })
+        console.log('Here?', result);
+        res.json(result);
+    });
+});
+
+router.put('/unlikePost', requireLogin, (req, res) => {
+    Post.findByIdAndUpdate(req.body.postId, {
+        $pull: { likedBy: req.user._id }
+    }, {
+        new: true
+    }).exec((err, result) => {
+        if (err) return res.status(422).json({ message: err })
+        res.json(result);
+    });
+});
 
 module.exports = router;

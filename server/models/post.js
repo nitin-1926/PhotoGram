@@ -16,6 +16,10 @@ const postSchema = new mongoose.Schema({
     timeStamp: {
         type: Date,
         default: new Date()
-    }
+    },
+    likedBy: [{
+        type: ObjectId,
+        ref: 'User'
+    }]
 });
 mongoose.model('Post', postSchema);
