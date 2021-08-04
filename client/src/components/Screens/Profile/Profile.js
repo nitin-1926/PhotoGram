@@ -6,7 +6,12 @@ import './Profile.css';
 const Profile = () => {
 
     const [userPosts, setUserPosts] = useState([]);
-    const {state, dispatch} = useContext(UserContext);
+    const { state, dispatch } = useContext(UserContext);
+    
+    const onPostDataChange = newPostsData => {
+        setUserPosts(newPostsData);
+    };
+
     useEffect(() => {
         fetch('myPosts', {
             headers: {
@@ -42,6 +47,7 @@ const Profile = () => {
                 bodyStyle={{padding: '12px 0px 0px'}}
                 imageHeight={'250px'}
                 isProfilePage={true}
+                onPostDataChange={onPostDataChange}
             />
         </div>
     )

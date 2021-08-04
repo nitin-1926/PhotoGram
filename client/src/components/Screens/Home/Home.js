@@ -6,6 +6,10 @@ const Home = () => {
 
     const [posts, setPosts] = useState([]);
 
+    const onPostDataChange = newPostsData => {
+        setPosts(newPostsData);
+    };
+
     useEffect(() => {
         fetch('allPosts', {
             headers: {
@@ -17,10 +21,6 @@ const Home = () => {
                 setPosts(data.posts);
             });
     }, []);
-
-    const onPostDataChange = newPostsData => {
-        setPosts(newPostsData);
-    };
 
     return (
         <PostCard
